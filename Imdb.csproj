@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Critic.cs" />
     <Compile Include="Film.cs" />
     <Compile Include="Interface1.cs" />
     <Compile Include="Person.cs" />
