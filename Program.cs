@@ -10,6 +10,8 @@ namespace Imdb
     {
         static void Main(string[] args)
         {
+            Person person = new Stuff("","");
+
         }
     }
 }

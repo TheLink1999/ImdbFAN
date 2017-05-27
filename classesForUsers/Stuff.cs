@@ -6,8 +6,18 @@ using System.Threading.Tasks;
 
 namespace Imdb
 {
-    class Stuff 
+    class Stuff : Person
     {
+        //fields
+        
+        //properties
+
+        //constructor
+        public Stuff(string n, string p)
+        {
+
+        }
+        //methods
 
     }
 }

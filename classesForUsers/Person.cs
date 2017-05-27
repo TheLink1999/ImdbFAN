@@ -12,15 +12,18 @@ namespace Imdb
         private string name;
         private string phone;
         //proprties
-        string Name
+        public string Name
         {
-            get { return name; }
+            get
+            {
+                return name;
+            }
             set
             {
                 name = value;
             }
         }
-        string Phone
+        public string Phone
         {
             get
             {
@@ -44,6 +47,12 @@ namespace Imdb
             Name = n;
             Phone = p;
         }
+
+        public Person()
+        {
+            Name = "gweast";
+        }
+
         //Methods
         public override string ToString()
         {

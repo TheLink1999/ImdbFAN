@@ -57,8 +57,8 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Full Crew\NewFolder1\" />
-    <Folder Include="Full Crew\NewFolder2\" />
+    <Folder Include="Full Crew,kinoprofessi\NewFolder1\" />
+    <Folder Include="Full Crew,kinoprofessi\NewFolder2\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

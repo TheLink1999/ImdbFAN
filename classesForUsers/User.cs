@@ -6,8 +6,18 @@ using System.Threading.Tasks;
 
 namespace Imdb
 {
-    class User
+    class User : Person, IActiveForPerson
     {
-        
+        //fields
+
+        //properties
+
+        //constructor
+
+        //methods
+        public void Active()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
