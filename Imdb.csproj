@@ -44,17 +44,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Critic.cs" />
-    <Compile Include="Film.cs" />
-    <Compile Include="Interface1.cs" />
-    <Compile Include="Person.cs" />
+    <Compile Include="classesForUsers\Critic.cs" />
+    <Compile Include="Films\Film.cs" />
+    <Compile Include="classesForUsers\Interfaces\Interface1.cs" />
+    <Compile Include="classesForUsers\Person.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Stuff.cs" />
-    <Compile Include="User.cs" />
+    <Compile Include="classesForUsers\Stuff.cs" />
+    <Compile Include="classesForUsers\User.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Full Crew\NewFolder1\" />
+    <Folder Include="Full Crew\NewFolder2\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
