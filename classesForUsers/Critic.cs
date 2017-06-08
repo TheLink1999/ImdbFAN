@@ -6,8 +6,15 @@ using System.Threading.Tasks;
 
 namespace Imdb
 {
-    class Critic
+    class Critic : User
     {
+        //fields
+
+        //properties
+
+        //constructors
+        public Critic(string n, string p):base(n,p) { }
+        //methods
 
     }
 }

@@ -11,8 +11,9 @@ namespace Imdb
         //fields
         private string name;
         private string phone;
+        private 
         //proprties
-        public string Name
+        string Name
         {
             get
             {
@@ -23,7 +24,7 @@ namespace Imdb
                 name = value;
             }
         }
-        public string Phone
+        string Phone
         {
             get
             {

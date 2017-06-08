@@ -13,7 +13,10 @@ namespace Imdb
         //properties
 
         //constructor
+        public User(string n, string p)
+        {
 
+        }
         //methods
         public void Active()
         {

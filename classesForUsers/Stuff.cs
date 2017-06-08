@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace Imdb
 {
-    class Stuff : Person
+    class Stuff : User
     {
         //fields
-        
+
         //properties
 
         //constructor
-        public Stuff(string n, string p)
+        public Stuff(string n, string p) : base(n, p)
         {
 
         }
