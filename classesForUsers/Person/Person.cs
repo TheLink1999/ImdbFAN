@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Imdb
 {
-    class Person
+   abstract class Person
     {
         //fields
-        private string name;
+        public string name;
         private string phone;
         private 
         //proprties
@@ -53,7 +53,9 @@ namespace Imdb
         {
             Name = "gweast";
         }
-
+        public Person(string n) {
+            Name = n;
+        }
         //Methods
         public override string ToString()
         {

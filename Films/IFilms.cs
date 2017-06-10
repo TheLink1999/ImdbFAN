@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Imdb.Theatr
+namespace Imdb
 {
-    class theatr
+    interface IFilms
     {
 
     }

@@ -6,15 +6,12 @@ using System.Threading.Tasks;
 
 namespace Imdb
 {
-    class Critic : User
+    class Actor : Cinemaman
     {
         //fields
-
-        //properties
-
-        //constructors
-        public Critic(string n, string p,string l, Password pass) : base(n,p,l,pass)
-        {
+        public List<Film> ActorFilms = new List<Film>();
+        //constructor
+        public Actor(string n):base(n) {
 
         }
         //methods

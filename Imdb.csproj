@@ -36,6 +36,8 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Device" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Drawing.Design" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -45,29 +47,31 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="classesForUsers\Critic.cs" />
+    <Compile Include="classesForUsers\Interfaces\Ilists.cs" />
+    <Compile Include="classesForUsers\Interfaces\IReserve.cs" />
+    <Compile Include="classesForUsers\Interfaces\ISearch.cs" />
+    <Compile Include="classesForUsers\Interfaces\IStaff.cs" />
+    <Compile Include="classesForUsers\Person\Rev.cs" />
     <Compile Include="classesForUsers\Person\Password.cs" />
     <Compile Include="Films\Film.cs" />
-    <Compile Include="classesForUsers\Interfaces\UserActive.cs" />
+    <Compile Include="classesForUsers\Interfaces\IActiveForUser.cs" />
     <Compile Include="classesForUsers\Person\Person.cs" />
+    <Compile Include="Films\IFilms.cs" />
+    <Compile Include="Full Crew,kinoprofessi\Actor.cs" />
+    <Compile Include="Full Crew,kinoprofessi\Cinemaman.cs" />
+    <Compile Include="Full Crew,kinoprofessi\Director.cs" />
+    <Compile Include="Full Crew,kinoprofessi\Operator.cs" />
+    <Compile Include="Full Crew,kinoprofessi\Writer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="classesForUsers\Stuff.cs" />
     <Compile Include="classesForUsers\User.cs" />
-    <Compile Include="Theatr\theatr.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Console\" />
-    <Folder Include="Full Crew,kinoprofessi\NewFolder1\" />
-    <Folder Include="Full Crew,kinoprofessi\NewFolder2\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="classesForUsers\Users.xml">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

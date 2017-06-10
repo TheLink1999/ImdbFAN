@@ -7,7 +7,7 @@ using System.Globalization;
 
 namespace Imdb
 {
-    interface IActiveForPerson
+    interface IActiveForUser
     {
         void Active();
     }

@@ -3,15 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 
-namespace Imdb.classesForUsers.Person
+namespace Imdb
 {
-    class Password
+    public class Password
     {
         //field
         private string pass;
-        protected string secretQwuestion;
-        private string scretAnswerd;
         //properties
         public string Pass
         {
@@ -20,60 +19,38 @@ namespace Imdb.classesForUsers.Person
                 pass = value;
             }
         }
-        public string SQ
-        {
-            get
-            {
-                return $"Secret question : {secretQwuestion}";
-            }
-            set
-            {
-                secretQwuestion = value;
-            }
-        }
-        public string SA
-        {
-            get
-            {
-                return $"Secret answerd : {scretAnswerd}";
-            }
-            set
-            {
-                scretAnswerd = value;
-            }
-        }
+        
         //constructors
-        public Password(string p, string sQ, string sA)
-        {
-            Pass = p;
-            SQ = sQ;
-            SA = sA;
-        }
         public Password(string p)
         {
             Pass = p;
+            
         }
         //Methods
-        private void Shrifavanie(string s)
+        private string Shrifavanie(string s)
         {
-
+            string key = "123456gyugygiu9688cycdchv";
+            string aNew = "";
+            for (int i = 0; i < s.Length; i++)
+            {
+                aNew += (s[i] + s[i + 1]) * key[i];
+            }
+            return aNew;
         }
         public override string ToString()
         {
             return pass;
         }
-        public void chengePassWithOldPass()
+        public string chengePassWithOldPass(string oidPass)
         {
-            
-            
-        }
-        public void chengePassWithEmail()
-        {
-
-        }
-        public void chengePasswithSA()
-        {
-
-        }
+            if (oidPass == pass)
+            {
+                return "Geve new Password";
+            }
+            else
+            {
+                throw new Exception("Password are incorect");
+            }
+        }       
     }
 }
