@@ -8,14 +8,14 @@ namespace Imdb
 {
     interface IStaff
     {
-        void ClientHistory(List<User> client);
+        void ClientHistory();
         void FilmHistory();
         void Films();
-        void FilmPrakatGiving();
-        void GiveAFilme();
+        void FilmPrakatGiving(User u,Film film);
+        void GiveAFilme(User u, Film f);
         void CalendarManagment();
         void ReturnAfilm();
-        void FinanceManegmant();
+        void FinanceManegmant(Film f,string s);
         void FilmManagment();
     }
 }

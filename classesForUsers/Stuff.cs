@@ -3,64 +3,75 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft;
+using System.IO;
 
 namespace Imdb
 {
-    class Stuff : User,IStaff
+    class Stuff : User, IStaff
     {
         //fields
-        
+        public static double AllMoneyOfDay;
         //properties
 
         //constructor
-        public Stuff(string n, string p,string l,Password pass,double cart) : base(n,p,l,pass,cart)
+        public Stuff(string n, string p, string l, Password pass, double cart) : base(n, p, l, pass, cart)
         {
             isStafff = true;
         }
         //methods
         public void CalendarManagment()
         {
-            throw new NotImplementedException();
-        }
+            System.Diagnostics.Process.Start("CalendarManagment.txt");//bolor karevor gort 
+                }
 
-        public void ClientHistory(List<User> client)
+        public void ClientHistory()
         {
-            throw new NotImplementedException();
+
+            System.Diagnostics.Process.Start("ClientHistory.txt");//registraciai jamanak avelanuma
+
         }
 
         public void FilmHistory()
         {
-            throw new NotImplementedException();
+            System.Diagnostics.Process.Start("FilmHistory.txt");
         }
 
         public void FilmManagment()
         {
-            throw new NotImplementedException();
+            System.Diagnostics.Process.Start("FilmManagment.txt");//user rserv
         }
 
-        public void FilmPrakatGiving()
+        public void FilmPrakatGiving(User u, Film f)
         {
-            throw new NotImplementedException();
+            u.AddPracat(f);
+            FinanceManegmant(f,"prakat");
         }
 
         public void Films()
         {
-            throw new NotImplementedException();
+            System.Diagnostics.Process.Start("Film.txt");
         }
 
-        public void FinanceManegmant()
+        public void FinanceManegmant(Film f,string s)
         {
-            throw new NotImplementedException();
+            string[] n = { $"{DateTime.Now.ToString()} - {s} : {f.Name} - {AllMoneyOfDay}", "\n" };
+            IEnumerable<string> l = n;
+            File.AppendAllLines("FinanceManegmant.txt", l);
         }
-
-        public void GiveAFilme()
+        public void FinanceManegmantInfo()
         {
-            throw new NotImplementedException();
+            System.Diagnostics.Process.Start("FinanceManegmant.txt");
+        }
+        public void GiveAFilme(User u, Film f)
+        {
+            u.AddBuyFilms(f);
+            FinanceManegmant(f,"buy");
         }
 
         public void ReturnAfilm()
         {
-            throw new NotImplementedException();
+            System.Diagnostics.Process.Start("ReturnAfilm.txt");
         }
 
     }

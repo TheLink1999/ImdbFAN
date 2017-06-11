@@ -8,7 +8,7 @@ namespace Imdb
 {
     interface ISearch
     {
-        void Search(List<Film> films, List<Cinemaman> men);
+        void Search(List<Film> films, List<Cinemaman> men,string s);
         void SearchHistory();
     }
 }

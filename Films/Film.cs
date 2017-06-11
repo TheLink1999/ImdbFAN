@@ -14,17 +14,117 @@ namespace Imdb
         private string janr;
         private double rev = 0;
         private double revC = 0;
-        protected string price;
-        protected string priceforprocat;
+        protected double price;
+        protected double priceforprocat;
+        protected double filmPracatTime;
+        protected DateTime filmGivingTime;
         public int searchCount = 0;
+        protected int filmsThereAre;
+        protected int pracatRevCount;
+        protected int pracatOut;
+        protected int selesFilms;
+        public static int forSorting = 0;
         private List<Actor> Cast = new List<Actor>();
         private List<Director> Directors = new List<Director>();
         private List<Operator> Operators = new List<Operator>();
         private List<Writer> Writers = new List<Writer>();
         private List<Rev> revs = new List<Rev>();
-        public static int forSorting = 0;
+        public static int qanakObyakti = 0;
         //properties
-        public string NAme
+        public DateTime FilmGivingTime
+        {
+            get { return filmGivingTime; }
+            set { filmGivingTime = value; }
+        }
+        public double Price
+        {
+            get
+            {
+                return price;
+            }
+            set
+            {
+                if (User.isStafff)
+                {
+                    price = value;
+                }
+            }
+        }
+        public double Priceforprocat
+        {
+            get
+            {
+                return priceforprocat;
+            }
+            set
+            {
+                if (User.isStafff)
+                {
+                    priceforprocat = value;
+                }
+            }
+        }
+        public int ForSorting
+        {
+            get
+            {
+                return forSorting;
+            }
+            set
+            {
+                if (User.isStafff)
+                {
+                    forSorting = value;
+                }
+            }
+        }
+        public string FilmPAth
+        {
+            get { return $"{name}{filmProducetime.Year} "; }
+        }
+        public int PracatRevCount
+        {
+            get
+            {
+                return pracatRevCount;
+            }
+            set
+            {
+                if (User.isStafff)
+                {
+                    pracatRevCount = value;
+                }
+            }
+        }
+        public int PracatOut
+        {
+            get
+            {
+                return pracatOut;
+            }
+            set
+            {
+                if (User.isStafff)
+                {
+                    pracatOut = value;
+                }
+            }
+        }
+        public int SelesFilms
+        {
+            get
+            {
+                return selesFilms;
+            }
+            set
+            {
+                if (User.isStafff)
+                {
+                    selesFilms = value;
+                }
+            }
+        }
+        public string Name
         {
             get { return name; }
         }
@@ -36,11 +136,38 @@ namespace Imdb
         {
             get { return filmProducetime; }
         }
-        public double REvC {
+        public double REvC
+        {
             get { return revC; }
         }
-        public double REv {
+        public double REv
+        {
             get { return rev; }
+        }
+        public double FilmPracatTime
+        {
+            get
+            {
+                return filmPracatTime;
+            }
+            set
+            {
+                if (User.isStafff)
+                {
+                    filmPracatTime = value;
+                }
+            }
+        }
+        public int FilmThereAre
+        {
+            get { return filmsThereAre; }
+            set
+            {
+                if (User.isStafff)
+                {
+                    filmsThereAre = value;
+                }
+            }
         }
         //constructors
         public Film(string n, string jan, DateTime fd)
@@ -49,6 +176,11 @@ namespace Imdb
             filmProducetime = fd;
             janr = jan;
             searchCount++;
+            if (qanakObyakti == 0)
+            {
+                System.IO.File.CreateText($"{name}{filmProducetime.Year}.txt");
+                qanakObyakti++;
+            }
         }
         //methods
         public void AddRev(Rev r)
@@ -57,7 +189,7 @@ namespace Imdb
         }
         public override string ToString()
         {
-            REvsUSerMijin(revs);
+            REvsUSerMijin();
             return $"{name} : {filmProducetime.Year} : {janr} : {rev}";
         }
         public int CompareTo(Film obj)
@@ -123,34 +255,51 @@ namespace Imdb
                 }
             }
         }
-        private double REvsUSerMijin(List<Rev> r)
+        public double REvsUSerMijin()
         {
             int g = 0;
-            for (int i = 0; i < r.Count; i++)
+            for (int i = 0; i < revs.Count; i++)
             {
-                if (r[i].UR != 0)
+                if (revs[i].UR != 0)
                 {
-                    rev += r[i].UR;
+                    rev += revs[i].UR;
                 }
             }
             return rev / g;
         }
-        private double REvsCriticMijin(List<Rev> r)
+        public double REvsCriticMijin()
         {
             int g = 0;
-            for (int i = 0; i < r.Count; i++)
+            for (int i = 0; i < revs.Count; i++)
             {
-                if (r[i].CR != 0)
+                if (revs[i].CR != 0)
                 {
-                    rev += r[i].CR;
+                    rev += revs[i].CR;
                     g++;
                 }
             }
             return rev / g;
         }
-        public void InfoAddOrChanjeForCritics()
+        public void InfoAddOrChanjeForStaff()
         {
-            System.Diagnostics.Process.Start($"{name}.txt");
+            System.Diagnostics.Process.Start($"{name}{filmProducetime.Year}.txt");
         }
+        public void AddAcors(Actor actor)
+        {
+            Cast.Add(actor);
+        }
+        public void AddDircts(Director direct)
+        {
+            Directors.Add(direct);
+        }
+        public void AddOperators(Operator op)
+        {
+            Operators.Add(op);
+        }
+        public void AddWriters(Writer wr)
+        {
+            Writers.Add(wr);
+        }
+
     }
 }

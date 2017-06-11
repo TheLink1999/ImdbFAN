@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using System.IO;
 using System.Threading.Tasks;
 
 
@@ -14,17 +14,17 @@ namespace Imdb
         private string login;
         private Password pass;
         private bool isLogin = false;
-        protected bool isCritic = false;
-        protected bool isStafff = false;
+        private bool isCritic = false;
+        public static bool isStafff = false;
         protected double cart;
         //Lists
         protected List<Film> Whatchlist = new List<Film>();
         protected List<Film> ReserevFilm = new List<Film>();
         protected List<Film> SearchFilms = new List<Film>();
         protected List<Cinemaman> SearchCinemamen = new List<Cinemaman>();
-        protected List<Film> Notifications = new List<Film>();
-        protected List<Film> Pracat = new List<Film>();
-        protected List<Film> BuyFilms = new List<Film>();
+        protected List<Film> Notifications = new List<Film>();//peta artael urish dzev
+        protected List<Film> Pracat = new List<Film>();//peta artael
+        protected List<Film> BuyFilms = new List<Film>();//peta artael
         //properties
         public string Login
         {
@@ -55,22 +55,21 @@ namespace Imdb
             this.pass = pass;
             this.cart = cart;
         }
-
+        public User() { }
 
         //methods
-        public void Search(List<Film> films, List<Cinemaman> men)
+        public void Search(List<Film> films, List<Cinemaman> men, string s)
         {
             ConsoleKeyInfo cki;
             int left = Console.CursorLeft;
             int top = Console.CursorTop;
             int forRem = 0;
-            cki = Console.ReadKey(true);
-            if (cki.KeyChar >= 0 && cki.KeyChar <= 9 && cki.KeyChar >= 'a' && cki.KeyChar <= 'z' && cki.KeyChar >= 'A' && cki.KeyChar <= 'Z')
-            {
+            
+            
 
                 for (int i = 0; i < films.Count; i++)
                 {
-                    if (films[i].NAme.Contains(cki.ToString()))
+                    if (films[i].Name.Contains(s))
                     {
                         if (forRem == 0)
                         {
@@ -88,7 +87,7 @@ namespace Imdb
 
                 for (int i = 0; i < men.Count; i++)
                 {
-                    if (men[i].name.Contains(cki.ToString()))
+                    if (men[i].name.Contains(s))
                     {
                         if (forRem == 0)
                         {
@@ -103,7 +102,7 @@ namespace Imdb
 
                 }
                 Console.SetCursorPosition(left,top);
-            }
+            
 
         }
 
@@ -131,28 +130,41 @@ namespace Imdb
 
         }
 
-        public void addSearchHistory(object search) {
-            if (search.GetType().Equals("Film"))
-            {
-
-            }
+        public void addSearchCinemamen(Cinemaman search) {
+            SearchCinemamen.Add(search);
         }
         public void ReserveFilmForWhatching(Film reserveFilm)
         {
+            string[] n = { $"{Name} | {reserveFilm.Name} - {DateTime.Now}", "\n" };
+            IEnumerable<string> l = n;
+            File.AppendAllLines("FilmManagment.txt", l);
             ReserevFilm.Add(reserveFilm);
         }
-
+        public void RevmovFromeReserveFilm(Film reserveFilm)
+        {
+            for (int i = 0; i < ReserevFilm.Count; i++)
+            {
+                if (i != 0 && (ReserevFilm[i].Name == BuyFilms[i].Name)&&(ReserevFilm[i].Name==Pracat[i].Name))
+                {
+                    ReserevFilm.Remove(ReserevFilm[i]);
+                }
+            }
+        }
         public void Active()
         {
-            System.Diagnostics.Process.Start($"{Name}.txt");
+            System.Diagnostics.Process.Start($"{Login}.txt");
         }
-        public void ActiveAdd(DateTime dateTime, string textPath)
+        public void ActiveAdd()
         {
-            System.IO.StreamWriter a = new System.IO.StreamWriter(textPath);
-            a.WriteLine($"{Name} : {dateTime}");
+            string[] n = { $"{ DateTime.Now.ToString() } | login","\n"};
+            IEnumerable<string> l = n;
+            File.AppendAllLines($"{Login}.txt", l);
         }
         public  void LogOut()
         {
+            string[] n = { $"{ DateTime.Now.ToString() } | log out", "\n" };
+            IEnumerable<string> l = n;
+            File.AppendAllLines($"{Login}.txt", l);
             isLogin = false;
         }
         public  bool LogInfo()
@@ -162,98 +174,6 @@ namespace Imdb
         public void LogIn() {
             isLogin = true;
         }
-
-        private static void ClearCurrentConsoleLine()
-        {
-            int currentLineCursor = Console.CursorTop;
-            Console.SetCursorPosition(0, Console.CursorTop);
-            Console.Write(new string(' ', Console.WindowWidth));
-            Console.SetCursorPosition(0, currentLineCursor);
-        }
-        private static string Pasword(int t, string b = "")
-
-        {
-            string pass = "";
-            if (t != 1)
-                Console.Write("Enter your password: ");
-            ConsoleKeyInfo key;
-            int a = Console.CursorTop;
-            int i = Console.CursorLeft;
-            int m = i;
-            int s = 1;
-            bool incorect = true;
-            do
-            {
-                if (s == 0)
-                {
-                    Console.SetCursorPosition(i, a);
-                    s = 1;
-                }
-                key = Console.ReadKey(true);
-
-                if (key.Key != ConsoleKey.Backspace && key.Key != ConsoleKey.Escape && key.Key != ConsoleKey.LeftArrow && key.Key != ConsoleKey.RightArrow && key.Key != ConsoleKey.Enter)
-                {
-                    pass += key.KeyChar;
-                    a = Console.CursorTop;
-
-                    Console.Write("*");
-                    i++;
-                }
-                else if (key.Key == ConsoleKey.Escape)
-                {
-
-                    Environment.Exit(0);
-                }
-                else if (key.Key == ConsoleKey.LeftArrow && i != m)
-                {
-                    i--;
-                    Console.SetCursorPosition(i, a);
-                }
-                else if (key.Key == ConsoleKey.RightArrow)
-                {
-                    i++;
-                    Console.SetCursorPosition(i, a);
-                }
-                else
-                {
-                    if (key.Key == ConsoleKey.Backspace && pass.Length > 0)
-                    {
-                        pass = pass.Substring(0, (pass.Length - 1));
-                        i--;
-                        Console.Write("\b \b");
-                    }
-                    Console.Write("\b");
-                }
-                if ((pass.Length > 16 || pass.Length < 8))
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.SetCursorPosition(2, a + 1);
-                    Console.Write("Your pass must be have length 8 - 16");
-                    incorect = true;
-                    s = 0;
-                }
-                else if ((!b.Contains(pass) && t == 1 && !incorect) || (!b.Equals(pass) && t == 1 && !incorect))
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.SetCursorPosition(2, a + 1);
-                    Console.Write("Your passes not equels");
-                    incorect = true;
-                    s = 0;
-                }
-                else
-                {
-                    Console.SetCursorPosition(2, a + 1);
-                    ClearCurrentConsoleLine();
-                    incorect = false;
-                    s = 0;
-                }
-                Console.ResetColor();
-            }
-            while (key.Key != ConsoleKey.Enter || incorect);
-            return pass;
-        }
-
-
         public void AddTOWhatchList(Film film)
         {
             Whatchlist.Add(film);
@@ -279,12 +199,34 @@ namespace Imdb
 
         public void AddPracat(Film film)
         {
+            film.FilmGivingTime = DateTime.Now;
             Pracat.Add(film);
+            Stuff.AllMoneyOfDay += film.Priceforprocat;
         }
 
         public void AddBuyFilms(Film film)
         {
-            BuyFilms.Add(film);
+            film.FilmGivingTime = DateTime.Now;
+            BuyFilms.Add(film);          
+            Stuff.AllMoneyOfDay += film.Priceforprocat;
+        }
+        public void BECritic() {
+            isCritic = true;
+        }
+        public bool IsCritic() {
+            return isCritic;
+        }
+        public void ReturnAfilm() {
+            for (int i = 0; i < Pracat.Count; i++)
+            {
+                if (i!=0 && (Pracat[i].FilmGivingTime.AddDays(Pracat[i].FilmPracatTime) < DateTime.Now))
+                {
+                    string[] n = {$"{Name}   {Pracat[i].Name}  {Pracat[i].FilmGivingTime.Day}:{Pracat[i].FilmGivingTime.Month}:{Pracat[i].FilmGivingTime.Year} - {DateTime.Now.Day}:{DateTime.Now.Month}:{DateTime.Now.Year}","\n"};
+                    IEnumerable<string> l = n;
+                    File.AppendAllLines("ReturnAfilm.txt", l);
+                    Pracat.Remove(Pracat[i]);
+                }
+            }
         }
     }
 
