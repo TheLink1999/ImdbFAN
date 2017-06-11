@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 using System.Drawing;
-using Newtonsoft.Json;
 namespace Imdb
 {
     class Program
