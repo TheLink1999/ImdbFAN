@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace Imdb
 {
-   abstract class Person
+    abstract class Person
     {
         //fields
-        public string name;
+        private string name;
         private string phone;
-        private 
-        //proprties
-        string Name
+        
+       //proprties
+       public string Name
         {
             get
             {
@@ -24,7 +24,7 @@ namespace Imdb
                 name = value;
             }
         }
-        string Phone
+        public string Phone
         {
             get
             {
@@ -53,7 +53,8 @@ namespace Imdb
         {
             Name = "gweast";
         }
-        public Person(string n) {
+        public Person(string n)
+        {
             Name = n;
         }
         //Methods

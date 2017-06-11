@@ -12,9 +12,15 @@ namespace Imdb
         public List<Film> ActorFilms = new List<Film>();
         //constructor
         public Actor(string n):base(n) {
-
+            
         }
         //methods
-
+        public void Add(Film film ) {
+            ActorFilms.Add(film);
+        }
+        public override string professy()
+        {
+            return "Actor";
+        }
     }
 }

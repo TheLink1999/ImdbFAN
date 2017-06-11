@@ -10,6 +10,9 @@ namespace Imdb
     {
         public int searchCount = 0;
         public string name;
+        public virtual string professy() {
+            return null;
+        }
         public Cinemaman(string n):base(n) {
             name = n;
         }
@@ -25,6 +28,10 @@ namespace Imdb
             else {
                 return 1;
             }
+        }
+        public override string ToString()
+        {
+            return professy() + " : " + name; 
         }
     }
 }

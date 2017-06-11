@@ -13,9 +13,9 @@ namespace Imdb
         //properties
 
         //constructors
-        public Critic(string n, string p,string l, Password pass) : base(n,p,l,pass)
+        public Critic(string n, string p, string l, Password pass, double cart) : base(n, p, l, pass, cart)
         {
-
+            isCritic = true;
         }
         //methods
 

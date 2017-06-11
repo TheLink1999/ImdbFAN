@@ -14,7 +14,9 @@ namespace Imdb
         private string janr;
         private double rev = 0;
         private double revC = 0;
-        public  int searchCount = 0;
+        protected string price;
+        protected string priceforprocat;
+        public int searchCount = 0;
         private List<Actor> Cast = new List<Actor>();
         private List<Director> Directors = new List<Director>();
         private List<Operator> Operators = new List<Operator>();
@@ -22,7 +24,24 @@ namespace Imdb
         private List<Rev> revs = new List<Rev>();
         public static int forSorting = 0;
         //properties
-
+        public string NAme
+        {
+            get { return name; }
+        }
+        public string JAnr
+        {
+            get { return janr; }
+        }
+        public DateTime FilmData
+        {
+            get { return filmProducetime; }
+        }
+        public double REvC {
+            get { return revC; }
+        }
+        public double REv {
+            get { return rev; }
+        }
         //constructors
         public Film(string n, string jan, DateTime fd)
         {
@@ -73,7 +92,7 @@ namespace Imdb
                     return -1;
                 }
             }
-            else if(forSorting == 3) 
+            else if (forSorting == 3)
             {
                 if (this.name[0] > obj.name[0])
                 {
@@ -129,7 +148,8 @@ namespace Imdb
             }
             return rev / g;
         }
-        public void InfoAddOrChanjeForCritics() {
+        public void InfoAddOrChanjeForCritics()
+        {
             System.Diagnostics.Process.Start($"{name}.txt");
         }
     }

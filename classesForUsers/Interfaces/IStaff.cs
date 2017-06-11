@@ -14,7 +14,7 @@ namespace Imdb
         void FilmPrakatGiving();
         void GiveAFilme();
         void CalendarManagment();
-        void ReturnABook();
+        void ReturnAfilm();
         void FinanceManegmant();
         void FilmManagment();
     }

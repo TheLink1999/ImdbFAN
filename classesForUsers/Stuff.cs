@@ -13,7 +13,7 @@ namespace Imdb
         //properties
 
         //constructor
-        public Stuff(string n, string p,string l,Password pass) : base(n,p,l,pass)
+        public Stuff(string n, string p,string l,Password pass,double cart) : base(n,p,l,pass,cart)
         {
             isStafff = true;
         }
@@ -58,7 +58,7 @@ namespace Imdb
             throw new NotImplementedException();
         }
 
-        public void ReturnABook()
+        public void ReturnAfilm()
         {
             throw new NotImplementedException();
         }

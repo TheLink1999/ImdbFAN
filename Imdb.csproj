@@ -69,9 +69,28 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="classesForUsers\StaffFiles\Films.json" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Console\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="classesForUsers\StaffFiles\CalendarMenejment.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="classesForUsers\StaffFiles\ClientHitory.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="classesForUsers\StaffFiles\FilmeHistory.txt" />
+    <Content Include="classesForUsers\StaffFiles\FilmManagment.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="classesForUsers\StaffFiles\FilmPrakatGiving.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="classesForUsers\StaffFiles\FinanceManegmant.txt" />
+    <Content Include="classesForUsers\StaffFiles\GivingFilm.txt" />
+    <Content Include="classesForUsers\StaffFiles\RetunAfilm.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
