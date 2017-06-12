@@ -225,7 +225,7 @@ namespace Imdb
                     films.Add(new Film(lines[i], lines[i + 1], lines[i + 2]));
                 }
             }
-
+            Console.ForegroundColor = ConsoleColor.Green;
             int a = 1;
             bool f = true;
             while (true)
