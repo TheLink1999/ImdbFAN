@@ -373,7 +373,11 @@ namespace Imdb
                         f = false;
                     }
                     f = true;
-                    FIlmInfo(films[a - 1]);
+                    if (a!=0)
+                    {
+                        FIlmInfo(films[a - 1]);
+                    }
+                    
                 }
 
                 if (a == 3)//search
@@ -392,7 +396,7 @@ namespace Imdb
                     {
                         try
                         {
-                            Console.Write(">");
+                            Console.Write("Press 0 for Go home>");
 
                             a = Convert.ToInt32(Console.ReadLine());
 
@@ -405,7 +409,10 @@ namespace Imdb
                         f = false;
                     }
                     f = true;
-                    FIlmInfo(films[a - 1]);
+                    if (a != 0)
+                    {
+                        FIlmInfo(films[a - 1]);
+                    }
                 }
             }
 
