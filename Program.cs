@@ -88,13 +88,13 @@ namespace Imdb
                     loginedUsep = "user";
                     loginedUser = users[i];
                 }
-                break;
+                
 
                 if (ada == 0) Console.WriteLine("Password incorrect \nYou can scoll up and see your password, But noooo!!\n");
                 if (ada == 1) Console.WriteLine("Password incorrect \nAgain??\n");
                 if (ada == 2) Console.WriteLine("Password incorrect \nWhats wrong with you??\n");
                 if (ada == 3) Console.WriteLine("Password incorrect \nYou'r hopless @@\n");
-                ada++;
+                ada++;break;
             }
         }
         static void LogOut()
@@ -200,7 +200,7 @@ namespace Imdb
 
 
             lines = File.ReadAllLines(userPath);
-            if (lines.Length != 0 && lines[0]!="")
+            if (lines.Length != 0 && lines[0] != "")
             {
                 for (int i = 0; i < lines.Length; i += 6)
                 {
@@ -373,11 +373,11 @@ namespace Imdb
                         f = false;
                     }
                     f = true;
-                    if (a!=0)
+                    if (a != 0)
                     {
                         FIlmInfo(films[a - 1]);
                     }
-                    
+
                 }
 
                 if (a == 3)//search
@@ -414,251 +414,252 @@ namespace Imdb
                         FIlmInfo(films[a - 1]);
                     }
                 }
-            }
 
 
-            
-            if (a == 5 && loginedUsep != "")//Logout
-            {
-                LogOut();
-            }
-            if (a == 7)//users
-            {
-                Console.Clear();
-                for (int i = 0; i < users.Count; i++)
+
+
+                if (a == 5 && loginedUsep != "")//Logout
                 {
-                    Console.WriteLine();
-                    Console.WriteLine($" {i + 1}  {users[i].Name}");
+                    LogOut();
                 }
-                Console.Read();
-            }
-            if (a == 4 && loginedUsep != "")
-            {
-                if (loginedUsep == "stuff")
+                if (a == 7)//users
                 {
-                    Console.WriteLine($"{loginedStaff.Name}                                                  ");
-
-                    Console.WriteLine(" ==========================================================");
-                    Console.WriteLine(" 1)Finance Managmant 2)ClientHistory 3)FilmManegmant 0)Home ");
-                    while (true)
+                    Console.Clear();
+                    for (int i = 0; i < users.Count; i++)
                     {
-                        while (f)
-                        {
-                            try
-                            {
-                                Console.Write(">");
+                        Console.WriteLine();
+                        Console.WriteLine($" {i + 1}  {users[i].Name}");
+                    }
+                    Console.Read();
+                }
+                if (a == 4 && loginedUsep != "")
+                {
+                    if (loginedUsep == "stuff")
+                    {
+                        Console.WriteLine($"{loginedStaff.Name}                                                  ");
 
-                                a = Convert.ToInt32(Console.ReadLine());
-
-                            }
-                            catch (Exception)
+                        Console.WriteLine(" ==========================================================");
+                        Console.WriteLine(" 1)Finance Managmant 2)ClientHistory 3)FilmManegmant 0)Home ");
+                        while (true)
+                        {
+                            while (f)
                             {
-                                Console.WriteLine("Please enter only numbers");
-                                continue;
+                                try
+                                {
+                                    Console.Write(">");
+
+                                    a = Convert.ToInt32(Console.ReadLine());
+
+                                }
+                                catch (Exception)
+                                {
+                                    Console.WriteLine("Please enter only numbers");
+                                    continue;
+                                }
+                                f = false;
                             }
-                            f = false;
-                        }
-                        f = true;
-                        if (a == 1)
-                        {
-                            System.Diagnostics.Process.Start("FilmManagment.txt");
-                        }
-                        if (a == 2)
-                        {
-                            System.Diagnostics.Process.Start("ClientHistory.txt");
-                        }
-                        if (a == 3)
-                        {
-                            System.Diagnostics.Process.Start("FilmManagment.txt");
-                        }
-                        if (a == 0)
-                        {
-                            break;
+                            f = true;
+                            if (a == 1)
+                            {
+                                System.Diagnostics.Process.Start("FilmManagment.txt");
+                            }
+                            if (a == 2)
+                            {
+                                System.Diagnostics.Process.Start("ClientHistory.txt");
+                            }
+                            if (a == 3)
+                            {
+                                System.Diagnostics.Process.Start("FilmManagment.txt");
+                            }
+                            if (a == 0)
+                            {
+                                break;
+                            }
                         }
                     }
-                }
-                else
-                {
-                    Console.WriteLine($"{loginedUser.Name}                                                  ");
-
-                    Console.WriteLine(" ==========================================================================");
-                    Console.WriteLine(" 1)ActiveHistory 2)Whachlist 3)BuyFilms 4)PracatFilms 5)ReserveFilms 0)Home");
-                    while (true)
+                    else
                     {
-                        while (f)
-                        {
-                            try
-                            {
-                                Console.Write(">");
+                        Console.WriteLine($"{loginedUser.Name}                                                  ");
 
-                                a = Convert.ToInt32(Console.ReadLine());
+                        Console.WriteLine(" ==========================================================================");
+                        Console.WriteLine(" 1)ActiveHistory 2)Whachlist 3)BuyFilms 4)PracatFilms 5)ReserveFilms 0)Home");
+                        while (true)
+                        {
+                            while (f)
+                            {
+                                try
+                                {
+                                    Console.Write(">");
 
-                            }
-                            catch (Exception)
-                            {
-                                Console.WriteLine("Please enter only numbers");
-                                continue;
-                            }
-                            f = false;
-                        }
-                        f = true;
-                        if (a == 1)
-                        {
-                            loginedUser.Active();
-                        }
-                        if (a == 2)
-                        {
-                            Console.WriteLine("-----------------------");
+                                    a = Convert.ToInt32(Console.ReadLine());
 
-                            for (int i = 0; i < loginedUser.Whatchlist.Count; i++)
-                            {
-                                Console.WriteLine($"{i + 1} + {loginedUser.Whatchlist[i]}");
+                                }
+                                catch (Exception)
+                                {
+                                    Console.WriteLine("Please enter only numbers");
+                                    continue;
+                                }
+                                f = false;
                             }
-                        }
-                        if (a == 3)
-                        {
-                            Console.WriteLine("-----------------------");
+                            f = true;
+                            if (a == 1)
+                            {
+                                loginedUser.Active();
+                            }
+                            if (a == 2)
+                            {
+                                Console.WriteLine("-----------------------");
 
-                            for (int i = 0; i < loginedUser.BuyFilms.Count; i++)
-                            {
-                                Console.WriteLine($"{i + 1} + {loginedUser.BuyFilms[i]}");
+                                for (int i = 0; i < loginedUser.Whatchlist.Count; i++)
+                                {
+                                    Console.WriteLine($"{i + 1} + {loginedUser.Whatchlist[i]}");
+                                }
                             }
-                        }
-                        if (a == 4)
-                        {
-                            Console.WriteLine("-----------------------");
+                            if (a == 3)
+                            {
+                                Console.WriteLine("-----------------------");
 
-                            for (int i = 0; i < loginedUser.Pracat.Count; i++)
-                            {
-                                Console.WriteLine($"{i + 1} + {loginedUser.Pracat[i]}");
+                                for (int i = 0; i < loginedUser.BuyFilms.Count; i++)
+                                {
+                                    Console.WriteLine($"{i + 1} + {loginedUser.BuyFilms[i]}");
+                                }
                             }
-                        }
-                        if (a == 5)
-                        {
-                            Console.WriteLine("-----------------------");
-                            for (int i = 0; i < loginedUser.ReserevFilm.Count; i++)
+                            if (a == 4)
                             {
-                                Console.WriteLine($"{i + 1} + {loginedUser.ReserevFilm[i]}");
+                                Console.WriteLine("-----------------------");
+
+                                for (int i = 0; i < loginedUser.Pracat.Count; i++)
+                                {
+                                    Console.WriteLine($"{i + 1} + {loginedUser.Pracat[i]}");
+                                }
                             }
-                        }
-                        if (a == 0)
-                        {
-                            break;
+                            if (a == 5)
+                            {
+                                Console.WriteLine("-----------------------");
+                                for (int i = 0; i < loginedUser.ReserevFilm.Count; i++)
+                                {
+                                    Console.WriteLine($"{i + 1} + {loginedUser.ReserevFilm[i]}");
+                                }
+                            }
+                            if (a == 0)
+                            {
+                                break;
+                            }
                         }
                     }
-                }
 
-            }
-            if (a == 6 && loginedUsep == "stuff")//AddFilm
-            {
-                Console.Clear();
-                Console.Write("Films name : ");
-                string name = Console.ReadLine();
-                Console.Write("Film janr : ");
-                string janr = Console.ReadLine();
-                Console.Write("Film date : ");
-                string date = Console.ReadLine();
-                films.Add(new Film(name, janr, date));
-                Console.Write("Film Price(please enter only int nombers) : ");
-                films[films.Count - 1].Price = Convert.ToInt32(Console.ReadLine());
-                Console.Write("Film Pracat Price(please enter only int nombers) : ");
-                films[films.Count - 1].Priceforprocat = Convert.ToInt32(Console.ReadLine());
-                Console.WriteLine("ThankYou");
-                Console.ReadKey();
-            }
-            if (a == 8)//givingPrakat
-            {
-                Console.Write("USer Name : ");
-                string name = Console.ReadLine();
-                int i = FindUser(name);
-                if (i != -1)
+                }
+                if (a == 6 && loginedUsep == "stuff")//AddFilm
                 {
-                    Console.Write("Filme name : ");
-                    string film = Console.ReadLine();
-                    for (int k = 0; k < films.Count; k++)
+                    Console.Clear();
+                    Console.Write("Films name : ");
+                    string name = Console.ReadLine();
+                    Console.Write("Film janr : ");
+                    string janr = Console.ReadLine();
+                    Console.Write("Film date : ");
+                    string date = Console.ReadLine();
+                    films.Add(new Film(name, janr, date));
+                    Console.Write("Film Price(please enter only int nombers) : ");
+                    films[films.Count - 1].Price = Convert.ToInt32(Console.ReadLine());
+                    Console.Write("Film Pracat Price(please enter only int nombers) : ");
+                    films[films.Count - 1].Priceforprocat = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine("ThankYou");
+                    Console.ReadKey();
+                }
+                if (a == 8)//givingPrakat
+                {
+                    Console.Write("USer Name : ");
+                    string name = Console.ReadLine();
+                    int i = FindUser(name);
+                    if (i != -1)
                     {
-                        if (film == films[i].Name)
+                        Console.Write("Filme name : ");
+                        string film = Console.ReadLine();
+                        for (int k = 0; k < films.Count; k++)
                         {
-                            users[i].AddPracat(films[i]);
-                            break;
+                            if (film == films[i].Name)
+                            {
+                                users[i].AddPracat(films[i]);
+                                break;
+                            }
                         }
                     }
-                }
-                else
-                {
-                    Console.WriteLine("Sory");
-
-                }
-            }
-            if (a == 9)//givingBuy
-            {
-                Console.Write("USer Name : ");
-                string name = Console.ReadLine();
-                int i = FindUser(name);
-                if (i != -1)
-                {
-                    Console.Write("Filme name : ");
-                    string film = Console.ReadLine();
-                    for (int k = 0; k < films.Count; k++)
+                    else
                     {
-                        if (film == films[i].Name)
-                        {
-                            users[i].AddBuyFilms(films[i]);
-                            break;
-                        }
+                        Console.WriteLine("Sory");
+
                     }
                 }
-                else
+                if (a == 9)//givingBuy
                 {
-                    Console.WriteLine("Sory");
+                    Console.Write("USer Name : ");
+                    string name = Console.ReadLine();
+                    int i = FindUser(name);
+                    if (i != -1)
+                    {
+                        Console.Write("Filme name : ");
+                        string film = Console.ReadLine();
+                        for (int k = 0; k < films.Count; k++)
+                        {
+                            if (film == films[i].Name)
+                            {
+                                users[i].AddBuyFilms(films[i]);
+                                break;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Sory");
+
+                    }
 
                 }
-
-            }
-            a = 1;
-            File.WriteAllText(userPath, "");
-            File.WriteAllText(filmePath, "");
-            File.WriteAllText(stuffPath, "");
-            if (a==1 || a!=1)
-            {
-                StreamWriter file2 = new StreamWriter(stuffPath);
-                StreamWriter file1 = new StreamWriter(userPath);
-                StreamWriter file3 = new StreamWriter(filmePath);
-
-                foreach (User u in users)
+                a = 1;
+                File.WriteAllText(userPath, "");
+                File.WriteAllText(filmePath, "");
+                File.WriteAllText(stuffPath, "");
+                if (a == 1 || a != 1)
                 {
-                    file1.WriteLine(u.Name);
-                    file1.WriteLine(u.Phone);
-                    file1.WriteLine(u.Login);
-                    file1.WriteLine(u.Pass);
-                    file1.WriteLine(u.Cart);
-                }
-                file1.Flush();
-                file1.Close();
-                foreach (Stuff stuff in stuffs)
-                {
-                    file2.WriteLine(stuff.Name);
-                    file2.WriteLine(stuff.Phone);
-                    file2.WriteLine(stuff.Login);
-                    file2.WriteLine(stuff.Pass);
-                    file2.WriteLine(stuff.Cart);
-                }
-                file2.Flush();
-                file2.Close();
-                foreach (Film film in films)
-                {
-                    file3.WriteLine(film.Name);
-                    file3.WriteLine(film.JAnr);
-                    file3.WriteLine(film.FilmData);
+                    StreamWriter file2 = new StreamWriter(stuffPath);
+                    StreamWriter file1 = new StreamWriter(userPath);
+                    StreamWriter file3 = new StreamWriter(filmePath);
+
+                    foreach (User u in users)
+                    {
+                        file1.WriteLine(u.Name);
+                        file1.WriteLine(u.Phone);
+                        file1.WriteLine(u.Login);
+                        file1.WriteLine(u.Pass);
+                        file1.WriteLine(u.Cart);
+                    }
+                    file1.Flush();
+                    file1.Close();
+                    foreach (Stuff stuff in stuffs)
+                    {
+                        file2.WriteLine(stuff.Name);
+                        file2.WriteLine(stuff.Phone);
+                        file2.WriteLine(stuff.Login);
+                        file2.WriteLine(stuff.Pass);
+                        file2.WriteLine(stuff.Cart);
+                    }
+                    file2.Flush();
+                    file2.Close();
+                    foreach (Film film in films)
+                    {
+                        file3.WriteLine(film.Name);
+                        file3.WriteLine(film.JAnr);
+                        file3.WriteLine(film.FilmData);
+
+                    }
+                    file3.Flush();
+                    file3.Close();
+                    if (a == 1)
+                        System.Diagnostics.Process.Start("Info.txt");
 
                 }
-                file3.Flush();
-                file3.Close();
-                if (a == 1)
-                    System.Diagnostics.Process.Start("Info.txt");
-
             }
         }
-    }
 
+    }
 }
