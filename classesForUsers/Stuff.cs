@@ -19,6 +19,7 @@ namespace Imdb
         {
             isStafff = true;
         }
+        public Stuff() { }
         //methods
         public void CalendarManagment()
         {

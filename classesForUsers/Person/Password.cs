@@ -27,15 +27,15 @@ namespace Imdb
             
         }
         //Methods
-        private string Shrifavanie(string s)
+        static public string Passsecurity(string pass)
         {
-            string key = "123456gyugygiu9688cycdchv";
-            string aNew = "";
-            for (int i = 0; i < s.Length; i++)
+            string pass1 = "";
+            string key = "everybody goes to the rapture";
+            for (int i = 0; i < pass.Length - 1; i++)
             {
-                aNew += (s[i] + s[i + 1]) * key[i];
+                pass1 += (char)((pass[i] + pass[i + 1]) + key[i]);
             }
-            return aNew;
+            return pass1;
         }
         public override string ToString()
         {

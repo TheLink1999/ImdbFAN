@@ -13,30 +13,10 @@ namespace Imdb
 {
     static class ClonsoleWork
     {
-        static Stack<string> commands = new Stack<string>();
-
-        static string Artahaytuiun(int left, int top)
+        public static void ClearCurrentConsoleLine()
         {
-            Console.SetCursorPosition(left, top);
-            int newleft = left;
-            int newtop = top;
-            ConsoleKeyInfo key;
-            string word = "";
-            do
-            {
-                key = Console.ReadKey(true);
-                if (key.Key != ConsoleKey.Backspace && key.Key != ConsoleKey.Escape && key.Key != ConsoleKey.LeftArrow && key.Key != ConsoleKey.RightArrow && key.Key != ConsoleKey.Enter && key.Key != ConsoleKey.DownArrow && key.Key != ConsoleKey.UpArrow)
-                {
-                    word += key.KeyChar;
-                    newleft++;
-                }
-            } while (true);
-        }
-
-        public static void ClearCurrentConsoleLine(int top)
-        {
-            int currentLineCursor = top;
-            Console.SetCursorPosition(0, top);
+            int currentLineCursor = Console.CursorTop;
+            Console.SetCursorPosition(0, Console.CursorTop);
             Console.Write(new string(' ', Console.WindowWidth));
             Console.SetCursorPosition(0, currentLineCursor);
         }
@@ -113,7 +93,7 @@ namespace Imdb
                 else
                 {
                     Console.SetCursorPosition(2, a + 1);
-                    ClearCurrentConsoleLine(a + 1);
+                    ClearCurrentConsoleLine();
                     incorect = false;
                     s = 0;
                 }
@@ -122,101 +102,6 @@ namespace Imdb
             while (key.Key != ConsoleKey.Enter || incorect);
             return pass;
         }
-        public static void Home(User u, List<Film> films =null)
-        {
-            Console.ForegroundColor = ConsoleColor.DarkGreen;
-            Console.SetCursorPosition(10, 0);
-            Console.Title = "Home";
-            if (u.LogInfo())
-            {
-                Console.WriteLine("===============================================================");
-                Console.SetCursorPosition(10, Console.CursorTop);
-                Console.WriteLine("                                                               ");
-                Console.SetCursorPosition(10, Console.CursorTop);
-                Console.WriteLine("                           IMDb FAN                            ");
-                Console.SetCursorPosition(10, Console.CursorTop);
-                Console.WriteLine("                                                               ");
-                Console.SetCursorPosition(10, Console.CursorTop);
-                Console.WriteLine("     HOME          FILMS         SEARCH           ACCOUNT      ");
-                Console.SetCursorPosition(10, Console.CursorTop);
-                Console.WriteLine("===============================================================");
-
-                Console.SetCursorPosition(10, Console.CursorTop + 2);
-                if (films!= null && films.Count != 0)
-                {
-                    Random r = new Random();
-                    Film.forSorting = r.Next(2, 3);
-                    films.Sort();
-                    Console.SetCursorPosition(10, Console.CursorTop + 2);
-                    Console.WriteLine("Popular Films :");
-                    Console.WriteLine("===============");
-                    Table.FilmsTable(films,10,Console.CursorTop+1,0,0,3);
-
-                    Film.forSorting = 0;
-                    films.Sort();
-                    Console.SetCursorPosition(10, Console.CursorTop + 2);
-                    Console.WriteLine("Popular Critic Rate Films :");
-                    Console.WriteLine("===============");
-                    Table.FilmsTable(films, 10, Console.CursorTop + 1, 0, 0, 3);
-
-                    Film.forSorting = 1;
-                    films.Sort();
-                    Console.SetCursorPosition(10, Console.CursorTop + 2);
-                    Console.WriteLine("Popular User Rate Films :");
-                    Console.WriteLine("===============");
-                    Table.FilmsTable(films, 10, Console.CursorTop + 1, 0, 0, 3);
-                }
-
-            }
-            else
-            {
-                Console.WriteLine("===============================================================");
-                Console.SetCursorPosition(10, Console.CursorTop);
-                Console.WriteLine("                                                               ");
-                Console.SetCursorPosition(10, Console.CursorTop);
-                Console.WriteLine("                           IMDb FAN                            ");
-                Console.SetCursorPosition(10, Console.CursorTop);
-                Console.WriteLine("                                                               ");
-                Console.SetCursorPosition(10, Console.CursorTop);
-                Console.WriteLine("              HOME          FILMS         SEARCH               ");
-                Console.SetCursorPosition(10, Console.CursorTop);
-                Console.WriteLine("===============================================================");
-
-                Console.SetCursorPosition(10, Console.CursorTop + 2);
-                if (films != null && films.Count != 0)
-                {
-                    Random r = new Random();
-                    Film.forSorting = r.Next(2, 3);
-                    films.Sort();
-                    Console.SetCursorPosition(10, Console.CursorTop + 2);
-                    Console.WriteLine("Popular Films :");
-                    Console.WriteLine("===============");
-                    Table.FilmsTable(films, 10, Console.CursorTop + 1, 0, 0, 3);
-
-                    Film.forSorting = 0;
-                    films.Sort();
-                    Console.SetCursorPosition(10, Console.CursorTop + 2);
-                    Console.WriteLine("Popular Critic Rate Films :");
-                    Console.WriteLine("===============");
-                    Table.FilmsTable(films, 10, Console.CursorTop + 1, 0, 0, 3);
-
-                    Film.forSorting = 1;
-                    films.Sort();
-                    Console.SetCursorPosition(10, Console.CursorTop + 2);
-                    Console.WriteLine("Popular User Rate Films :");
-                    Console.WriteLine("===============");
-                    Table.FilmsTable(films, 10, Console.CursorTop + 1, 0, 0, 3);
-                }
-            }
-            ConsoleKeyInfo cki;
-            do
-            {
-                cki = Console.ReadKey();
-
-
-
-
-            } while (true);
-        }
+        
     }
 }

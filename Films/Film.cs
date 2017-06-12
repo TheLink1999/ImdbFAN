@@ -10,7 +10,7 @@ namespace Imdb
     {
         //fields
         private string name;
-        private DateTime filmProducetime;
+        private string filmProducetime;
         private string janr;
         private double rev = 0;
         private double revC = 0;
@@ -23,11 +23,7 @@ namespace Imdb
         protected int pracatRevCount;
         protected int pracatOut;
         protected int selesFilms;
-        public static int forSorting = 0;
-        private List<Actor> Cast = new List<Actor>();
-        private List<Director> Directors = new List<Director>();
-        private List<Operator> Operators = new List<Operator>();
-        private List<Writer> Writers = new List<Writer>();
+        public static int forSorting = 3;       
         private List<Rev> revs = new List<Rev>();
         public static int qanakObyakti = 0;
         //properties
@@ -44,10 +40,9 @@ namespace Imdb
             }
             set
             {
-                if (User.isStafff)
-                {
+               
                     price = value;
-                }
+                
             }
         }
         public double Priceforprocat
@@ -58,10 +53,9 @@ namespace Imdb
             }
             set
             {
-                if (User.isStafff)
-                {
+                
                     priceforprocat = value;
-                }
+                
             }
         }
         public int ForSorting
@@ -72,15 +66,14 @@ namespace Imdb
             }
             set
             {
-                if (User.isStafff)
-                {
+                
                     forSorting = value;
-                }
+                
             }
         }
         public string FilmPAth
         {
-            get { return $"{name}{filmProducetime.Year} "; }
+            get { return $"{name}{filmProducetime}.text"; }
         }
         public int PracatRevCount
         {
@@ -90,10 +83,9 @@ namespace Imdb
             }
             set
             {
-                if (User.isStafff)
-                {
+                
                     pracatRevCount = value;
-                }
+                
             }
         }
         public int PracatOut
@@ -104,10 +96,9 @@ namespace Imdb
             }
             set
             {
-                if (User.isStafff)
-                {
+                
                     pracatOut = value;
-                }
+                
             }
         }
         public int SelesFilms
@@ -118,10 +109,9 @@ namespace Imdb
             }
             set
             {
-                if (User.isStafff)
-                {
+                
                     selesFilms = value;
-                }
+                
             }
         }
         public string Name
@@ -132,7 +122,7 @@ namespace Imdb
         {
             get { return janr; }
         }
-        public DateTime FilmData
+        public string FilmData
         {
             get { return filmProducetime; }
         }
@@ -152,10 +142,9 @@ namespace Imdb
             }
             set
             {
-                if (User.isStafff)
-                {
+                
                     filmPracatTime = value;
-                }
+                
             }
         }
         public int FilmThereAre
@@ -163,14 +152,13 @@ namespace Imdb
             get { return filmsThereAre; }
             set
             {
-                if (User.isStafff)
-                {
+                
                     filmsThereAre = value;
-                }
+                
             }
         }
         //constructors
-        public Film(string n, string jan, DateTime fd)
+        public Film(string n, string jan, string fd)
         {
             name = n;
             filmProducetime = fd;
@@ -178,7 +166,6 @@ namespace Imdb
             searchCount++;
             if (qanakObyakti == 0)
             {
-                System.IO.File.CreateText($"{name}{filmProducetime.Year}.txt");
                 qanakObyakti++;
             }
         }
@@ -189,8 +176,7 @@ namespace Imdb
         }
         public override string ToString()
         {
-            REvsUSerMijin();
-            return $"{name} : {filmProducetime.Year} : {janr} : {rev}";
+            return $"{name} : {filmProducetime} : {janr} : {REvsUSerMijin()}";
         }
         public int CompareTo(Film obj)
         {
@@ -282,24 +268,9 @@ namespace Imdb
         }
         public void InfoAddOrChanjeForStaff()
         {
-            System.Diagnostics.Process.Start($"{name}{filmProducetime.Year}.txt");
+            System.Diagnostics.Process.Start($"{name}{filmProducetime}.txt");
         }
-        public void AddAcors(Actor actor)
-        {
-            Cast.Add(actor);
-        }
-        public void AddDircts(Director direct)
-        {
-            Directors.Add(direct);
-        }
-        public void AddOperators(Operator op)
-        {
-            Operators.Add(op);
-        }
-        public void AddWriters(Writer wr)
-        {
-            Writers.Add(wr);
-        }
+        
 
     }
 }

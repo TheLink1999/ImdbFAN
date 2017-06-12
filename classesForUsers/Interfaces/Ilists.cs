@@ -9,7 +9,6 @@ namespace Imdb
     interface Ilists
     {
         void AddTOWhatchList(Film film);
-        void AddSearchFilms(Film film);
         void AddNotifications(Film film);
         void AddPracat(Film film);
         void AddBuyFilms(Film film);

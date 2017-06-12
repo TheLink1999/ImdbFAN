@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Imdb
 {
-    class User : Person, IActiveForUser, IReserve, ISearch, Ilists
+    class User : Person, IActiveForUser, IReserve, Ilists
     {
         //fields
         private string login;
@@ -18,13 +18,11 @@ namespace Imdb
         public static bool isStafff = false;
         protected double cart;
         //Lists
-        protected List<Film> Whatchlist = new List<Film>();
-        protected List<Film> ReserevFilm = new List<Film>();
-        protected List<Film> SearchFilms = new List<Film>();
-        protected List<Cinemaman> SearchCinemamen = new List<Cinemaman>();
-        protected List<Film> Notifications = new List<Film>();//peta artael urish dzev
-        protected List<Film> Pracat = new List<Film>();//peta artael
-        protected List<Film> BuyFilms = new List<Film>();//peta artael
+        public List<Film> Whatchlist = new List<Film>();
+        public List<Film> ReserevFilm = new List<Film>();
+        public List<Film> Notifications = new List<Film>();//peta artael urish dzev
+        public List<Film> Pracat = new List<Film>();//peta artael
+        public List<Film> BuyFilms = new List<Film>();//peta artael
         //properties
         public string Login
         {
@@ -48,7 +46,7 @@ namespace Imdb
         }
         public Password Pass { get { return pass; } }
         public double Cart { get { return cart; } }
-        //constructor
+        //constructors
         public User(string n, string p, string l, Password pass,double cart) : base(n, p)
         {
             Login = l;
@@ -57,82 +55,7 @@ namespace Imdb
         }
         public User() { }
 
-        //methods
-        public void Search(List<Film> films, List<Cinemaman> men, string s)
-        {
-            ConsoleKeyInfo cki;
-            int left = Console.CursorLeft;
-            int top = Console.CursorTop;
-            int forRem = 0;
-            
-            
-
-                for (int i = 0; i < films.Count; i++)
-                {
-                    if (films[i].Name.Contains(s))
-                    {
-                        if (forRem == 0)
-                        {
-                            Console.WriteLine("FILMS");
-                            Console.WriteLine("=====");
-                            Console.WriteLine();
-                            forRem = 1;
-                        }
-                        Console.WriteLine($"{i + 1} : {films[i]}");
-                        Console.WriteLine();
-                    }
-
-                }
-                forRem = 0;
-
-                for (int i = 0; i < men.Count; i++)
-                {
-                    if (men[i].name.Contains(s))
-                    {
-                        if (forRem == 0)
-                        {
-                            Console.WriteLine("Cinemamen");
-                            Console.WriteLine("=========");
-                            Console.WriteLine();
-                            forRem = 1;
-                        }
-                        Console.WriteLine($"{i + 1} : {films[i]}");
-                        Console.WriteLine();
-                    }
-
-                }
-                Console.SetCursorPosition(left,top);
-            
-
-        }
-
-        public void SearchHistory()
-        {
-            //out/SearchFilms
-            Console.WriteLine("SEARCH FILMS");
-            Console.WriteLine("============");
-            Console.WriteLine();
-            for (int i = 0; i < SearchFilms.Count; i++)
-            {
-                Console.WriteLine($"{i + 1} : {SearchFilms[i]}");
-                Console.WriteLine();
-            }
-            Console.WriteLine();
-            Console.WriteLine("SEARCH CNEMAMEN");
-            Console.WriteLine("===============");
-            Console.WriteLine();
-            //out/SearchCinemamen
-            for (int i = 0; i < SearchCinemamen.Count; i++)
-            {
-                Console.WriteLine($"{i + 1} : {SearchCinemamen[i]}");
-                Console.WriteLine();
-            }
-
-        }
-
-        public void addSearchCinemamen(Cinemaman search) {
-            SearchCinemamen.Add(search);
-        }
+        //methods     
         public void ReserveFilmForWhatching(Film reserveFilm)
         {
             string[] n = { $"{Name} | {reserveFilm.Name} - {DateTime.Now}", "\n" };
@@ -186,11 +109,7 @@ namespace Imdb
             }
         }
 
-        public void AddSearchFilms(Film film)
-        {
-            SearchFilms.Add(film);
-
-        }
+       
 
         public void AddNotifications(Film film)
         {
