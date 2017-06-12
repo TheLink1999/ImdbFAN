@@ -360,7 +360,7 @@ namespace Imdb
                     {
                         try
                         {
-                            Console.Write(">");
+                            Console.Write("Press 0 for Go home>");
 
                             a = Convert.ToInt32(Console.ReadLine());
 
