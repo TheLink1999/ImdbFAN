@@ -97,7 +97,7 @@ namespace Imdb
                     incorect = false;
                     s = 0;
                 }
-                Console.ResetColor();
+                Console.ForegroundColor = ConsoleColor.Green;
             }
             while (key.Key != ConsoleKey.Enter || incorect);
             return pass;

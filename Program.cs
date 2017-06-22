@@ -75,19 +75,19 @@ namespace Imdb
             while (true)
             {
                 string a = ClonsoleWork.Pasword(0);
-                if (f.ToLower() == "stuff" && stuffs[i].Pass.Equals(Password.Passsecurity(a)))
+                if (f.ToLower() == "stuff" && stuffs[i].Pass.Pass.Equals(Password.Passsecurity(a)))
                 {
                     stuffs[i].LogIn();
                     loginedUsep = "stuff";
                     loginedStaff = stuffs[i];
                 }
-                else if (users[i].Pass.Equals(Password.Passsecurity(a)))
-                {
+                else if (users[i].Pass.Pass ==(Password.Passsecurity(a)))
+               {
                     users[i].LogIn();
                     users[i].ActiveAdd();
                     loginedUsep = "user";
                     loginedUser = users[i];
-                }
+              }
                 
 
                 if (ada == 0) Console.WriteLine("Password incorrect \nYou can scoll up and see your password, But noooo!!\n");
@@ -277,6 +277,39 @@ namespace Imdb
                     f = false;
                 }
                 f = true;
+                if (a == 3)
+                {
+                    Console.Clear();
+                    if (loginedUsep == "user")
+                    {
+                        Console.WriteLine("===============================================================");
+                        Console.WriteLine("                                                               ");
+                        Console.WriteLine("                           IMDb FAN                            ");
+                        Console.WriteLine("                                                               ");
+                        Console.WriteLine("         1)HOME  2)FILMS  3)SEARCH  4)ACCOUNT 5)LogOut         ");
+                        Console.WriteLine("===============================================================");
+                    }
+                    else if (loginedUsep == "stuff")
+                    {
+                        Console.WriteLine("===============================================================");
+                        Console.WriteLine("                                                               ");
+                        Console.WriteLine("                           IMDb FAN                            ");
+                        Console.WriteLine("                                                               ");
+                        Console.WriteLine("1)HOME  2)FILMS  3)SEARCH  4)ACCOUNT 6)AddFilm 5)LogOut 7)Users");
+                        Console.WriteLine("             8)FilmPracatGiving 9)FilmGiving                   ");
+                        Console.WriteLine("===============================================================");
+                    }
+                    else
+                    {
+                        Console.WriteLine("===============================================================");
+                        Console.WriteLine("                                                               ");
+                        Console.WriteLine("                           IMDb FAN                            ");
+                        Console.WriteLine("                                                               ");
+                        Console.WriteLine("         1)HOME  2)FILMS  3)SEARCH  10)LogIn  11)Register      ");
+                        Console.WriteLine("===============================================================");
+                    }
+                }
+                else { Console.Clear(); }
                 if (a == 1)
                     System.Diagnostics.Process.Start("Info.txt");
                 if (a == 10)//Login
@@ -615,7 +648,7 @@ namespace Imdb
                     }
 
                 }
-                a = 1;
+               
                 File.WriteAllText(userPath, "");
                 File.WriteAllText(filmePath, "");
                 File.WriteAllText(stuffPath, "");

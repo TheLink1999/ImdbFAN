@@ -14,6 +14,9 @@ namespace Imdb
         //properties
         public string Pass
         {
+            get {
+                return pass;
+            }
             set
             {
                 pass = value;
