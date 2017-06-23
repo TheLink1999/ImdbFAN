@@ -56,6 +56,7 @@
     <Compile Include="classesForUsers\Person\Rev.cs" />
     <Compile Include="classesForUsers\Person\Password.cs" />
     <Compile Include="Console\ClonsoleWork.cs" />
+    <Compile Include="Console\lineOfListe.cs" />
     <Compile Include="Films\Film.cs" />
     <Compile Include="classesForUsers\Interfaces\IActiveForUser.cs" />
     <Compile Include="classesForUsers\Person\Person.cs" />

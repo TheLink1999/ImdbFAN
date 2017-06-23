@@ -16,8 +16,8 @@ namespace Imdb
         static string userPath = @"../../Users.txt";
         static string stuffPath = @"../../Stuffs.txt";
         static string[] lines;
-        static User loginedUser;
-        static Stuff loginedStaff;
+        static int loginedUser;
+        static int loginedStaff;
         static string loginedUsep = "";
         //static int userIndex = -1;
         //methods//
@@ -79,22 +79,22 @@ namespace Imdb
                 {
                     stuffs[i].LogIn();
                     loginedUsep = "stuff";
-                    loginedStaff = stuffs[i];
+                    loginedStaff = i;
                 }
-                else if (users[i].Pass.Pass ==(Password.Passsecurity(a)))
-               {
+                else if (users[i].Pass.Pass == (Password.Passsecurity(a)))
+                {
                     users[i].LogIn();
                     users[i].ActiveAdd();
                     loginedUsep = "user";
-                    loginedUser = users[i];
-              }
-                
+                    loginedUser = i;
+                }
+
 
                 if (ada == 0) Console.WriteLine("Password incorrect \nYou can scoll up and see your password, But noooo!!\n");
                 if (ada == 1) Console.WriteLine("Password incorrect \nAgain??\n");
                 if (ada == 2) Console.WriteLine("Password incorrect \nWhats wrong with you??\n");
                 if (ada == 3) Console.WriteLine("Password incorrect \nYou'r hopless @@\n");
-                ada++;break;
+                ada++; break;
             }
         }
         static void LogOut()
@@ -103,18 +103,19 @@ namespace Imdb
                 Console.WriteLine("Not logged in");
             else
             {
+                users[loginedUser].LogOut();
                 loginedUsep = "";
-                loginedStaff = null;
-                loginedUser = null;
+                loginedStaff = -1;
+                loginedUser = -1;
                 Console.WriteLine("Done!!))");
             }
         }
-        static void FIlmInfo(Film film, User u = null, Stuff s = null)
+        static void FIlmInfo(Film film, User u, Stuff s)
         {
             Console.Clear();
             if (loginedUsep == "user")
                 Console.WriteLine($" 1)Buy({film.Price}$) 2) BuyPracat({film.Priceforprocat}$) 3) AddToWhatchList 4)Rate\n=============================================\n");
-            if (loginedUsep == "staff")
+            if (loginedUsep == "stuff")
                 Console.WriteLine($" 5)Change\n=============================================\n");
             Console.WriteLine($"  {film}" + "\n\n 0)GoHome\n\n");
 
@@ -153,7 +154,7 @@ namespace Imdb
                     else
                     {
                         u.AddBuyFilms(film);
-                        loginedStaff.FinanceManegmant(film, u.Name);
+                        stuffs[loginedStaff].FinanceManegmant(film, u.Name);
 
                     }
                 }
@@ -166,14 +167,14 @@ namespace Imdb
                     else
                     {
                         u.AddPracat(film);
-                        loginedStaff.FinanceManegmant(film, u.Name);
+                        stuffs[loginedStaff].FinanceManegmant(film, u.Name);
                     }
                 }
                 if (a == 3 && loginedUsep == "user")
                 {
                     u.AddTOWhatchList(film);
                 }
-                if (a == 5 && loginedUsep == "user")
+                if (a == 4 && loginedUsep == "user")
                 {
                     Rev r = new Rev();
                     r.UR = Convert.ToInt32(Console.ReadLine());
@@ -195,6 +196,7 @@ namespace Imdb
         static List<User> users = new List<User>();
         static List<Film> films = new List<Film>();
         static List<Stuff> stuffs = new List<Stuff>();
+        static List<lineOfListe> linesof = new List<lineOfListe>();
         public static void Main(string[] args)
         {
 
@@ -202,7 +204,7 @@ namespace Imdb
             lines = File.ReadAllLines(userPath);
             if (lines.Length != 0 && lines[0] != "")
             {
-                for (int i = 0; i < lines.Length; i += 6)
+                for (int i = 0; i < lines.Length; i += 5)
                 {
                     users.Add(new User(lines[i], lines[i + 1], lines[i + 2], new Password(lines[i + 3]), Convert.ToDouble(lines[i + 4])));
                 }
@@ -211,7 +213,7 @@ namespace Imdb
             lines = File.ReadAllLines(stuffPath);
             if (lines.Length != 0 && lines[0] != "")
             {
-                for (int i = 0; i < lines.Length; i += 6)
+                for (int i = 0; i < lines.Length; i += 5)
                 {
                     stuffs.Add(new Stuff(lines[i], lines[i + 1], lines[i + 2], new Password(lines[i + 3]), Convert.ToDouble(lines[i + 4])));
                 }
@@ -220,16 +222,21 @@ namespace Imdb
             lines = File.ReadAllLines(filmePath);
             if (lines.Length != 0 && lines[0] != "")
             {
-                for (int i = 0; i < lines.Length; i += 4)
+                for (int i = 0; i < lines.Length; i += 6)
                 {
                     films.Add(new Film(lines[i], lines[i + 1], lines[i + 2]));
+                    films[films.Count - 1].REv = Convert.ToDouble(lines[i + 3]);
+                    films[films.Count - 1].Price = Convert.ToDouble(lines[i + 4]);
+                    films[films.Count - 1].Priceforprocat = Convert.ToDouble(lines[i + 5]);
                 }
             }
             Console.ForegroundColor = ConsoleColor.Green;
             int a = 1;
+            string username = "";
             bool f = true;
             while (true)
             {
+                linesof.Clear();
                 Console.Clear();
                 if (loginedUsep == "user")
                 {
@@ -325,7 +332,6 @@ namespace Imdb
                 {
                     Console.Clear();
                     bool e = true;
-                    string username = "";
                     string[] password = new string[2];
                     string phone;
                     string name;
@@ -375,6 +381,9 @@ namespace Imdb
 
                     users.Add(new User(name, phone, username, new Password(Password.Passsecurity(password[0])), cart));
                     File.CreateText($"{username}.txt");
+                    string[] n = { $"{DateTime.Now.ToString()} - {username} : is register ", "\n" };
+                    IEnumerable<string> l = n;
+                    File.AppendAllLines("ClientHistory.txt", l);
                     if (e)
                         Console.WriteLine("Finally!! what took you so long??");
                     Console.Clear();
@@ -383,11 +392,13 @@ namespace Imdb
                 if (a == 2)//films
                 {
                     Console.WriteLine("\n");
-                    Console.WriteLine("  nomber        name          date       rete  ");
-                    Console.WriteLine("===============================================");
+                    Console.WriteLine("  nom      name                date                janr         rete  ");
+                    Console.WriteLine("======================================================================");
                     for (int i = 0; i < films.Count; i++)
                     {
-                        Console.WriteLine($"  {i + 1}  {films[i].Name}       {films[i].FilmData}    {films[i].REvsUSerMijin()}  ");
+
+                        linesof.Add(new lineOfListe(films[i], i + 1, ConsoleColor.Green, ConsoleColor.Black, Console.CursorTop));
+                        linesof[i].writeFilm();
                     }
                     while (f)
                     {
@@ -408,7 +419,17 @@ namespace Imdb
                     f = true;
                     if (a != 0)
                     {
-                        FIlmInfo(films[a - 1]);
+                        if (loginedStaff == -1 && (loginedUser == -1))
+                        {
+                            FIlmInfo(films[a - 1], null, null);
+
+                        }
+                        else if (loginedUser == -1)
+                        {
+                            FIlmInfo(films[a - 1], null, stuffs[loginedStaff]);
+                        }
+                        else
+                            FIlmInfo(films[a - 1],users[loginedUser],null);
                     }
 
                 }
@@ -422,7 +443,8 @@ namespace Imdb
                     {
                         if (films[i].Name.Contains(search))
                         {
-                            Console.WriteLine($"  {i + 1}  {films[i].Name}       {films[i].FilmData}    {films[i].REvsUSerMijin()}  ");
+                            linesof.Add(new lineOfListe(films[i], i + 1, ConsoleColor.Green, ConsoleColor.Black, Console.CursorTop));
+                            linesof[i].writeFilm();
                         }
                     }
                     while (f)
@@ -444,7 +466,17 @@ namespace Imdb
                     f = true;
                     if (a != 0)
                     {
-                        FIlmInfo(films[a - 1]);
+                        if (loginedStaff == -1 && (loginedUser == -1))
+                        {
+                            FIlmInfo(films[a - 1], null, null);
+
+                        }
+                        else if (loginedUser == -1)
+                        {
+                            FIlmInfo(films[a - 1], null, stuffs[loginedStaff]);
+                        }
+                        else
+                            FIlmInfo(films[a - 1], users[loginedUser], null);
                     }
                 }
 
@@ -469,7 +501,7 @@ namespace Imdb
                 {
                     if (loginedUsep == "stuff")
                     {
-                        Console.WriteLine($"{loginedStaff.Name}                                                  ");
+                        Console.WriteLine($"{users[loginedStaff].Name}                                                  ");
 
                         Console.WriteLine(" ==========================================================");
                         Console.WriteLine(" 1)Finance Managmant 2)ClientHistory 3)FilmManegmant 0)Home ");
@@ -512,7 +544,7 @@ namespace Imdb
                     }
                     else
                     {
-                        Console.WriteLine($"{loginedUser.Name}                                                  ");
+                        Console.WriteLine($"{users[loginedUser].Name}                                                  ");
 
                         Console.WriteLine(" ==========================================================================");
                         Console.WriteLine(" 1)ActiveHistory 2)Whachlist 3)BuyFilms 4)PracatFilms 5)ReserveFilms 0)Home");
@@ -537,41 +569,41 @@ namespace Imdb
                             f = true;
                             if (a == 1)
                             {
-                                loginedUser.Active();
+                                users[loginedUser].Active();
                             }
                             if (a == 2)
                             {
                                 Console.WriteLine("-----------------------");
 
-                                for (int i = 0; i < loginedUser.Whatchlist.Count; i++)
+                                for (int i = 0; i < users[loginedUser].Whatchlist.Count; i++)
                                 {
-                                    Console.WriteLine($"{i + 1} + {loginedUser.Whatchlist[i]}");
+                                    Console.WriteLine($"{i + 1} + {users[loginedUser].Whatchlist[i]}");
                                 }
                             }
                             if (a == 3)
                             {
                                 Console.WriteLine("-----------------------");
 
-                                for (int i = 0; i < loginedUser.BuyFilms.Count; i++)
+                                for (int i = 0; i < users[loginedUser].BuyFilms.Count; i++)
                                 {
-                                    Console.WriteLine($"{i + 1} + {loginedUser.BuyFilms[i]}");
+                                    Console.WriteLine($"{i + 1} + {users[loginedUser].BuyFilms[i]}");
                                 }
                             }
                             if (a == 4)
                             {
                                 Console.WriteLine("-----------------------");
 
-                                for (int i = 0; i < loginedUser.Pracat.Count; i++)
+                                for (int i = 0; i < users[loginedUser].Pracat.Count; i++)
                                 {
-                                    Console.WriteLine($"{i + 1} + {loginedUser.Pracat[i]}");
+                                    Console.WriteLine($"{i + 1} + {users[loginedUser].Pracat[i]}");
                                 }
                             }
                             if (a == 5)
                             {
                                 Console.WriteLine("-----------------------");
-                                for (int i = 0; i < loginedUser.ReserevFilm.Count; i++)
+                                for (int i = 0; i < users[loginedUser].ReserevFilm.Count; i++)
                                 {
-                                    Console.WriteLine($"{i + 1} + {loginedUser.ReserevFilm[i]}");
+                                    Console.WriteLine($"{i + 1} + {users[loginedUser].ReserevFilm[i]}");
                                 }
                             }
                             if (a == 0)
@@ -648,7 +680,7 @@ namespace Imdb
                     }
 
                 }
-               
+
                 File.WriteAllText(userPath, "");
                 File.WriteAllText(filmePath, "");
                 File.WriteAllText(stuffPath, "");
@@ -683,12 +715,15 @@ namespace Imdb
                         file3.WriteLine(film.Name);
                         file3.WriteLine(film.JAnr);
                         file3.WriteLine(film.FilmData);
+                        file3.WriteLine(film.REv);
+                        file3.WriteLine(film.Price);
+                        file3.WriteLine(film.Priceforprocat);
+
 
                     }
                     file3.Flush();
                     file3.Close();
-                    if (a == 1)
-                        System.Diagnostics.Process.Start("Info.txt");
+                    //File.Open($"{username}");
 
                 }
             }

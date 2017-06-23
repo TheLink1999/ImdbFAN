@@ -23,7 +23,7 @@ namespace Imdb
         protected int pracatRevCount;
         protected int pracatOut;
         protected int selesFilms;
-        public static int forSorting = 3;       
+        public static int forSorting = 3;
         private List<Rev> revs = new List<Rev>();
         public static int qanakObyakti = 0;
         //properties
@@ -40,9 +40,9 @@ namespace Imdb
             }
             set
             {
-               
-                    price = value;
-                
+
+                price = value;
+
             }
         }
         public double Priceforprocat
@@ -53,9 +53,9 @@ namespace Imdb
             }
             set
             {
-                
-                    priceforprocat = value;
-                
+
+                priceforprocat = value;
+
             }
         }
         public int ForSorting
@@ -66,9 +66,9 @@ namespace Imdb
             }
             set
             {
-                
-                    forSorting = value;
-                
+
+                forSorting = value;
+
             }
         }
         public string FilmPAth
@@ -83,9 +83,9 @@ namespace Imdb
             }
             set
             {
-                
-                    pracatRevCount = value;
-                
+
+                pracatRevCount = value;
+
             }
         }
         public int PracatOut
@@ -96,9 +96,9 @@ namespace Imdb
             }
             set
             {
-                
-                    pracatOut = value;
-                
+
+                pracatOut = value;
+
             }
         }
         public int SelesFilms
@@ -109,9 +109,9 @@ namespace Imdb
             }
             set
             {
-                
-                    selesFilms = value;
-                
+
+                selesFilms = value;
+
             }
         }
         public string Name
@@ -133,6 +133,7 @@ namespace Imdb
         public double REv
         {
             get { return rev; }
+            set { rev = value; }
         }
         public double FilmPracatTime
         {
@@ -142,9 +143,9 @@ namespace Imdb
             }
             set
             {
-                
-                    filmPracatTime = value;
-                
+
+                filmPracatTime = value;
+
             }
         }
         public int FilmThereAre
@@ -152,9 +153,9 @@ namespace Imdb
             get { return filmsThereAre; }
             set
             {
-                
-                    filmsThereAre = value;
-                
+
+                filmsThereAre = value;
+
             }
         }
         //constructors
@@ -249,9 +250,15 @@ namespace Imdb
                 if (revs[i].UR != 0)
                 {
                     rev += revs[i].UR;
+                    g++;
                 }
             }
-            return rev / g;
+            if (g == 0)
+            {
+                return 0;
+            }
+            else
+                return rev / g;
         }
         public double REvsCriticMijin()
         {
@@ -270,7 +277,7 @@ namespace Imdb
         {
             System.Diagnostics.Process.Start($"{name}{filmProducetime}.txt");
         }
-        
+
 
     }
 }
